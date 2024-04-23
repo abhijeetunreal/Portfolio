@@ -2,7 +2,7 @@ name: deployandpublish
 
 on:
   push:
-    branches: [ "master" ] 
+    branches: [ "main" ] 
 
 jobs:
   build:
