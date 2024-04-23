@@ -1,0 +1,24 @@
+﻿<MudDrawer @bind-Open="ShowDrawer"  Fixed=true Anchor="Anchor.Left" Elevation="0" Variant="@DrawerVariant.Mini">
+    <MudNavMenu> 
+        <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Menu" IconColor="Color.Info" OnClick="ShowRightDrawer">Content</MudNavLink>
+        <MudNavLink Href="" Icon="@Icons.Material.Filled.Home" IconColor="Color.Success">Home</MudNavLink>
+        <MudNavGroup Title="Projects" Icon="@Icons.Material.Filled.FiberNew" IconColor="Color.Primary" Expanded="true">
+            <MudNavLink Href="BartanBasan" Icon="@Icons.Material.Filled.Filter1" IconColor="Color.Success">Bartan Basan</MudNavLink>
+            <MudNavLink Href="Redesigning" Icon="@Icons.Material.Filled.Filter2" IconColor="Color.Success">Redesigning Leadless Pacemaker</MudNavLink>
+            <MudNavLink Href="@($"{path}#1.5")" Icon="@Icons.Material.Filled.Filter3" IconColor="Color.Success">First Doctor</MudNavLink>
+            <MudNavLink Href="@($"{path}#1.5")" Icon="@Icons.Material.Filled.Filter4" IconColor="Color.Success">Ved Mobile  </MudNavLink>
+            <MudNavLink Href="@($"{path}#1.5")" Icon="@Icons.Material.Filled.Filter5" IconColor="Color.Success">Miscellaneous  </MudNavLink>
+        </MudNavGroup> 
+    </MudNavMenu>
+</MudDrawer> 
+
+@code {
+    int k=0;
+    bool ShowDrawer = true;
+    string path = "unity/tutorials/basics/game-objects-and-scripts";
+
+    void ShowRightDrawer()
+    {
+        ShowDrawer = !ShowDrawer;
+    } 
+}

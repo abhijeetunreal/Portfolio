@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Components
+<MudPaper MaxHeight="@($"{height}vh")" MaxWidth="@($"{width}vh")" Elevation="0">
+    <iframe 
+            title="Glowing Nerve Plant" 
+            frameborder="@frameborder" 
+            allowfullscreen 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true" 
+            allow="autoplay; fullscreen; xr-spatial-tracking" 
+            xr-spatial-tracking 
+            execution-while-out-of-viewport 
+            execution-while-not-rendered 
+            web-share 
+            src="@($"https://sketchfab.com/models/{id}/embed?autospin=1&autostart=1")"> 
+        </iframe> 
+</MudPaper>
+
+@code{
+    [Parameter] public string Title {get;set;}="Glowing Nerve Plant";
+    [Parameter] public int frameborder {get;set;}=0;
+    [Parameter] public int width {get;set;}=640;
+    [Parameter] public int height {get;set;}=640;
+    [Parameter] public string id {get;set;}="b518051f964346cb9eb271b6423c12dd";
+}

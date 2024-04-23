@@ -1,0 +1,9 @@
+@page "/demo"
+
+
+<MudSlider @bind-Value="@value" Min="10" Max="100">Volume</MudSlider> 
+<SketchFab height="@value" width="@value"/>
+
+@code {
+    int value = 150;
+}

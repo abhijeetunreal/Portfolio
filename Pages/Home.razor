@@ -1,0 +1,190 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<div class="d-flex justify-space-between flex-grow-1 gap-4">
+    <MudFab Color="Color.Transparent" StartIcon="@Icons.Material.Filled.KeyboardArrowLeft" Label="Previous"  DisableElevation="true"  OnClick="@(()=>Prev(current))"/>
+        
+    <MudFab Color="Color.Transparent" Label="Next" EndIcon="@Icons.Material.Filled.KeyboardArrowRight"  DisableElevation="true"  OnClick="@(()=>Next(current))"/> 
+</div>
+<MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Elevation="0">
+    <MudImage Fluid="true" Src="@($"{presentationList[CurrentChoice.GetCurrentIndex()].image}")" Style="height:90vh" Alt="@($"{presentationList[current]}")" Class="rounded-lg"/>
+</MudPaper>
+<PageNo index="@(presentationList[CurrentChoice.GetCurrentIndex()].index)"/>
+@code
+{
+    List<HomeModel> presentationList =new ()
+    {
+        new HomeModel()
+        {
+            image="images/1.png",
+            index=1
+        },
+        new HomeModel()
+        {
+            image="images/2.png",
+            index=2
+        },
+        new HomeModel()
+        {
+            image="images/3.png",
+            index=3
+        },
+        new HomeModel()
+        {
+            image="images/4.png",
+            index=4
+        },
+        new HomeModel()
+        {
+            image="images/5.png",
+            index=5
+        },
+        new HomeModel()
+        {
+            image="images/6.png",
+            index=6
+        },
+        new HomeModel()
+        {
+            image="images/7.png",
+            index=7
+        },
+        new HomeModel()
+        {
+            image="images/8.png",
+            index=8
+        },
+        new HomeModel()
+        {
+            image="images/9.png",
+            index=9
+        },
+        new HomeModel()
+        {
+            image="images/10.png",
+            index=10
+        },
+        new HomeModel()
+        {
+            image="images/11.png",
+            index=11
+        },
+        new HomeModel()
+        {
+            image="images/12.png",
+            index=12
+        },
+        new HomeModel()
+        {
+            image="images/13.png",
+            index=13
+        },
+        new HomeModel()
+        {
+            image="images/14.png",
+            index=14
+        },
+        new HomeModel()
+        {
+            image="images/15.png",
+            index=15
+        },
+        new HomeModel()
+        {
+            image="images/16.png",
+            index=16
+        },
+        new HomeModel()
+        {
+            image="images/17.png",
+            index=17
+        },
+        new HomeModel()
+        {
+            image="images/18.png",
+            index=18
+        },
+        new HomeModel()
+        {
+            image="images/19.png",
+            index=19
+        },
+        new HomeModel()
+        {
+            image="images/20.png",
+            index=20
+        },
+        new HomeModel()
+        {
+            image="images/21.png",
+            index=21
+        },
+        new HomeModel()
+        {
+            image="images/22.png",
+            index=22
+        },
+        new HomeModel()
+        {
+            image="images/23.png",
+            index=23
+        }
+    };
+    public Home()
+    {
+        ls = Enumerable.Range(0,presentationList.Count).ToList();
+    }
+    List<int> ls;
+    int current =0;
+    void Next(int i)
+    {
+        Console.WriteLine(i);
+        current = (current+1)%ls.Count;
+        CurrentChoice.SetCurrentIndex(current);
+        StateHasChanged();
+    }
+    void Prev(int i)
+    {
+        current = (current-1);
+        if(current<0)
+            current=ls.Count-1;
+        CurrentChoice.SetCurrentIndex(current);
+        StateHasChanged();
+    }
+    
+}
+
+
+@code{
+    [Inject]
+    protected IJSRuntime JSRuntime { get; set; }
+
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("blazorArrowKeyPressed", DotNetObjectReference.Create(this));
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnArrowKeyPressed(string key)
+    {
+        if(next.Contains(key)) 
+            Prev(current);
+        
+        if(prev.Contains(key)) 
+            Next(current);
+        
+    }
+    HashSet<string> next =new()
+    {
+        "ArrowLeft","ArrowUp"
+    };
+    HashSet<string> prev =new()
+    {
+        "ArrowRight","ArrowDown", " "
+    };
+}
